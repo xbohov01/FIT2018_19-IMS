@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include "simlib.h"
 #include "FacilityContainer.h"
+#include "Customer.h"
 
 int main(int argc, char *argv[])
 {
@@ -76,6 +77,8 @@ int main(int argc, char *argv[])
     } else {
         facilityContainer->InitSimpleClerks(simpleClerks);
     }
+
+
 
     return 0;
 }

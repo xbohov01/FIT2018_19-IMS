@@ -4,11 +4,15 @@
 //Danil Grigorev xgrigo02
 //Customer header file
 
+#pragma once
 #include "simlib.h"
+#include "FacilityContainer.h"
 
 class Customer : public Process {
-    double arrivalTime;
-    double gotTicketTime;
+    public:
+        double arrivalTime;
+        double gotTicketTime;
+        FacilityContainer *facilityContainer;
     private:
         void SeizeTicketMachine();
         void SeizeClerk();

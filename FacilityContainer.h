@@ -12,6 +12,7 @@
     to the container.
 */
 
+#pragma once
 #include "simlib.h"
 #include <iostream> 
 #include <list> 
@@ -24,6 +25,7 @@ class FacilityContainer {
         FacilityContainer(bool divisionOn);
         ~FacilityContainer();
         Facility* FindShortestQueueTicketMachine();
+        Facility* QueueingSystem(int requestType);
         void InitTicketMachines(int amount);
         void InitSimpleClerks(int amount);
         void InitIncomingClerks(int amount);
