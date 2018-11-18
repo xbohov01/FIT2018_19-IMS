@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
             facilityContainer->InitOutgoingClerks(outgoingClerks);
         }
     } else {
-
+        facilityContainer->InitSimpleClerks(simpleClerks);
     }
 
     return 0;

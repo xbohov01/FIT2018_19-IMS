@@ -34,5 +34,7 @@ class FacilityContainer {
         list <Facility*> OutgoingClerks;
 
     private:
+        Facility* FindShortestQueueInFacilityList(list<Facility*> facilityList);
+        void InitFacilityList(list<Facility*>& facilityList, int amount, string name);
         bool laborDivision;
 };
