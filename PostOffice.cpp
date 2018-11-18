@@ -1,23 +1,27 @@
 //Simulation for FIT VUT IMS 2018/19
 //Authors
 //Samuel Bohovic xbohov01
-//Danil Grigorev xgrigoxx <<<<<<<<<<<<<<< TODO TVOJE ID
+//Danil Grigorev xgrigo02
+//Main file
 
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "simlib.h"
+#include "FacilityContainer.h"
 
 int main(int argc, char *argv[])
 {
     //Argument processing
     int c;
     bool laborDivision = false;
-    int machines = 0;
+    int ticketMachines = 0;
     int simpleClerks = 0;
     int incomingClerks = 0;
     int outgoingClerks = 0;
     int otherClerks = 0;
+    FacilityContainer *facilityContainer;
 
     if (argc < 5){
         fprintf(stderr, "Not enough arguments, consult README for correct usage\n");
@@ -31,7 +35,7 @@ int main(int argc, char *argv[])
                 simpleClerks = atoi(optarg);
                 break;
             case 'm':
-                machines = atoi(optarg);
+                ticketMachines = atoi(optarg);
                 break;
             case 'i':
                 laborDivision = true;
@@ -48,6 +52,29 @@ int main(int argc, char *argv[])
                 fprintf(stderr, "Argument error\n");
                 return 1;
         }
+    }
+
+    facilityContainer = new FacilityContainer(laborDivision);
+
+    //Argument check and facility inits
+    if (ticketMachines <= 0){
+        fprintf(stderr, "There needs to be at least one ticket machine\n");
+        return 1;
+    } else {
+        facilityContainer->InitTicketMachines(ticketMachines);
+    }
+
+    if (laborDivision == true){
+        if (outgoingClerks <= 0 || incomingClerks <= 0){
+            fprintf(stderr, "If you wish to simulate labor division you have to set incoming and outgoing clerks above 0\n");
+            delete facilityContainer;
+            return 1;
+        } else {
+            facilityContainer->InitIncomingClerks(incomingClerks);
+            facilityContainer->InitOutgoingClerks(outgoingClerks);
+        }
+    } else {
+
     }
 
     return 0;
