@@ -10,5 +10,8 @@
 #include "FacilityContainer.h"
 
 class CustomerGenerator : public Event {
-
+    public:
+        void Behavior();
+        FacilityContainer *facilityContainer;
+        bool laborDivision;
 };

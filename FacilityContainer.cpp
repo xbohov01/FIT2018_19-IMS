@@ -44,6 +44,12 @@ FacilityContainer::~FacilityContainer(){
 }
 
 //Public methods
+//Queueing system method represents the functions of it's real life counterpart
+//
+Facility* FacilityContainer::QueueingSystem(int requestType){
+
+}
+
 void FacilityContainer::InitTicketMachines(int amount){
     this->InitFacilityList(this->TicketMachines, amount, "TicketMachine");
 }
