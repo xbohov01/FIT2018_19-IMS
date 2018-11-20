@@ -11,8 +11,6 @@
 class Customer : public Process {
     public:
         void Behavior();
-        double arrivalTime;
-        double gotTicketTime;
         FacilityContainer *facilityContainer;
     private:
         void SeizeTicketMachine();

@@ -45,9 +45,14 @@ FacilityContainer::~FacilityContainer(){
 
 //Public methods
 //Queueing system method represents the functions of it's real life counterpart
-//
+//Depending on the request type given by the customer and current queueing method
+//It selects the clerk to serve the request by shortest queue
 Facility* FacilityContainer::QueueingSystem(int requestType){
-
+    if (this->laborDivision == true){
+        //1 = incoming 2 = outbound 3 = other
+    } else {
+        return this->FindShortestQueueInFacilityList(this->SimpleClerks);
+    }
 }
 
 void FacilityContainer::InitTicketMachines(int amount){

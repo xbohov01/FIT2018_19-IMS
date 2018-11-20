@@ -4,3 +4,4 @@
 //Danil Grigorev xgrigo02
 //Customer class file
 
+//TODO behavior

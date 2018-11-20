@@ -78,7 +78,10 @@ int main(int argc, char *argv[])
         facilityContainer->InitSimpleClerks(simpleClerks);
     }
 
+    //OUTPUT SETUP
 
+    //SIMULATION CONTROL
 
     return 0;
 }
+$result .= '</div>';
