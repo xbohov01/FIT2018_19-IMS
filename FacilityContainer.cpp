@@ -50,6 +50,21 @@ FacilityContainer::~FacilityContainer(){
 Facility* FacilityContainer::QueueingSystem(int requestType){
     if (this->laborDivision == true){
         //1 = incoming 2 = outbound 3 = other
+        if (requestType == 1){
+            return this->FindShortestQueueInFacilityList(this->IncomingClerks);
+        } else if (requestType == 2){
+            return this->FindShortestQueueInFacilityList(this->OutgoingClerks);
+        } else if (requestType = 3){
+            //Get shortest from both
+            Facility *incomingShortest = this->FindShortestQueueInFacilityList(this->IncomingClerks);
+            Facility *outgoingShortest = this->FindShortestQueueInFacilityList(this->OutgoingClerks);
+            //Return shorter
+            if (incomingShortest->QueueLen() > outgoingShortest->QueueLen){
+                return outgoingShortest;
+            } else {
+                return incomingShortest;
+            }
+        }
     } else {
         return this->FindShortestQueueInFacilityList(this->SimpleClerks);
     }
