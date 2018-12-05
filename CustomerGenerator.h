@@ -10,7 +10,9 @@
 #include "FacilityContainer.h"
 
 class CustomerGenerator : public Event {
-    public:
-        void Behavior();
+    
+    void Behavior();
+    
+    public:       
         FacilityContainer *facilityContainer;
 };
