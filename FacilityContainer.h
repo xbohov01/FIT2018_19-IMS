@@ -20,6 +20,11 @@
 
 using namespace std;
 
+#define MIN 60 // Zakladní jednotka času
+#define HOUR MIN*60
+#define WORK 10*HOUR
+#define REST 14*HOUR
+
 class FacilityContainer {
     public:
         FacilityContainer(bool divisionOn);

@@ -59,7 +59,7 @@ Facility* FacilityContainer::QueueingSystem(int requestType){
             Facility *incomingShortest = this->FindShortestQueueInFacilityList(this->IncomingClerks);
             Facility *outgoingShortest = this->FindShortestQueueInFacilityList(this->OutgoingClerks);
             //Return shorter
-            if (incomingShortest->QueueLen() > outgoingShortest->QueueLen){
+            if (incomingShortest->QueueLen() > outgoingShortest->QueueLen()){
                 return outgoingShortest;
             } else {
                 return incomingShortest;

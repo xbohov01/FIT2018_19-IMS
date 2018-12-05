@@ -11,6 +11,7 @@
 #include "simlib.h"
 #include "FacilityContainer.h"
 #include "Customer.h"
+#include "CustomerGenerator.h"
 
 int main(int argc, char *argv[])
 {
@@ -80,6 +81,10 @@ int main(int argc, char *argv[])
 
     //OUTPUT SETUP
 
+    Init(0, WORK+REST);
+    CustomerGenerator *gen = new CustomerGenerator();
+    gen->facilityContainer = facilityContainer;
+    Run();
     //SIMULATION CONTROL
 
     return 0;
