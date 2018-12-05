@@ -81,9 +81,10 @@ int main(int argc, char *argv[])
 
     //OUTPUT SETUP
 
-    Init(0, WORK+REST);
+    Init(0, 60*MIN);
     CustomerGenerator *gen = new CustomerGenerator();
     gen->facilityContainer = facilityContainer;
+    gen->Activate();
     Run();
     //SIMULATION CONTROL
 

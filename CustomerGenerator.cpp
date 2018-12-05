@@ -13,6 +13,6 @@ void CustomerGenerator::Behavior(){
     customer->Activate();
 
     //Sleep for 5-7 minutes
-    Activate(Time+Uniform(300, 720));
+    Activate(Time+Uniform(3*MIN, 6*MIN));
 }
 

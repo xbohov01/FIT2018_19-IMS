@@ -13,6 +13,7 @@ class Customer : public Process {
         void Behavior();
         FacilityContainer *facilityContainer;
     private:
+        void internalBehavior();
         void SeizeTicketMachine();
         void SeizeClerk();
 };
