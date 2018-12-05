@@ -1,3 +1,0 @@
-/home/dgrigore/Documents/projects/fit/IMS/FIT2018_19-IMS/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/dgrigore/Documents/projects/fit/IMS/FIT2018_19-IMS/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/dgrigore/Documents/projects/fit/IMS/FIT2018_19-IMS/cmake-build-debug/CMakeFiles/mytest.dir
