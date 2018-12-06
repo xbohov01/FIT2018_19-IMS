@@ -24,7 +24,9 @@ void Customer::Behavior() {
         Facility* f = facilityContainer->FindShortestQueueTicketMachine();
 
         enteredMLine = Time;
+
         Seize(*f);
+        
         if (Random() < 0.9) {
             Wait(Uniform(30,60));   // Usual waiting time 
         } else {
@@ -43,6 +45,7 @@ void Customer::Behavior() {
         }
 
         enteredLine = Time;
+
         Seize(*f);
         Wait(Uniform(3*MIN, 5*MIN));    // Customer time spent waiting for service 
         Release(*f);

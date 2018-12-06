@@ -91,27 +91,34 @@ Facility* FacilityContainer::FindShortestQueueTicketMachine(){
 }
 
 //Private methods
-Facility* FacilityContainer::FindShortestQueueInFacilityList(list<Facility*> facilityList){
+Facility* FacilityContainer::FindShortestQueueInFacilityList(list<Facility*>& facilityList){
     list <Facility*>::iterator it = facilityList.begin();
     int shortest = (*it)->QueueLen();
-    Facility *facilityPtr;
+    Facility *facilityPtr = *it;
+    Facility *tmp;
 
     if(shortest == 0){
-        return *it;
+        //return *it;
+        facilityPtr = *it;
+        //printf("$$$ %s %d\n", facilityPtr->Name(), facilityPtr->QueueLen());
+        return facilityPtr;
     }
 
-    for(it; it != facilityList.end(); it++){
+    for(it = facilityList.begin(); it != facilityList.end(); it++){
+        tmp = *it;
+        //printf(">> %s %d\n", tmp->Name(), tmp->QueueLen());
         if (shortest > (*it)->QueueLen()){
             shortest = (*it)->QueueLen();
             facilityPtr = *it;
         }
     }
+    //printf("##########\n");
 
+    //printf("$$$ %s %d\n", facilityPtr->Name(), facilityPtr->QueueLen());
     return facilityPtr;
 }
 
 void FacilityContainer::InitFacilityList(list<Facility*>& facilityList, int amount, string name){
-    //string name = "OutgoingClerk";
     string index;
     for (int i = 0; i < amount; i++){
         index = to_string(i+1);
