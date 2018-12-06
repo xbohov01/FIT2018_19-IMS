@@ -5,14 +5,29 @@
 //CustomerGenerator source file
 
 #include "CustomerGenerator.h"
-#include "Customer.h"
 
 void CustomerGenerator::Behavior(){
+    static bool first_run = true;
+    if (first_run) {
+        for (int i = 0, initial = static_cast<int> (Uniform(10, 20)); i < initial; ++i){
+            GenerateCustomer();
+        }
+        first_run = false;
+    } else {
+        GenerateCustomer();
+    }
+
+    //Generate next customer after 3-6 minutes
+    Activate(Time+Uniform(3*MIN, 6*MIN));
+}
+
+CustomerGenerator::CustomerGenerator(){ 
+    Activate();
+}
+
+void CustomerGenerator::GenerateCustomer(){
     Customer *customer = new Customer();
     customer->facilityContainer = this->facilityContainer;
     customer->Activate();
-
-    //Sleep for 5-7 minutes
-    Activate(Time+Uniform(3*MIN, 6*MIN));
 }
 

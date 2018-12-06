@@ -25,6 +25,7 @@ using namespace std;
 #define WORK 10*HOUR
 #define REST 14*HOUR
 
+
 class FacilityContainer {
     public:
         FacilityContainer(bool divisionOn);

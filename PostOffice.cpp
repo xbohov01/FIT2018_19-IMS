@@ -8,10 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <ctime>
 #include "simlib.h"
-#include "FacilityContainer.h"
-#include "Customer.h"
 #include "CustomerGenerator.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -79,14 +79,18 @@ int main(int argc, char *argv[])
         facilityContainer->InitSimpleClerks(simpleClerks);
     }
 
-    //OUTPUT SETUP
 
-    Init(0, 60*MIN);
+    /* Simulation setup */
+    RandomSeed(time(0)); // Setting pseudo random seed
+
+    Init(0, WORK);
     CustomerGenerator *gen = new CustomerGenerator();
     gen->facilityContainer = facilityContainer;
-    gen->Activate();
     Run();
-    //SIMULATION CONTROL
+
+    /* Printing results */
+    Customer::H.Output();
+
 
     return 0;
 }

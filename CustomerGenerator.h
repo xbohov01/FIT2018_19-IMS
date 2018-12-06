@@ -15,4 +15,8 @@ class CustomerGenerator : public Event {
     
     public:       
         FacilityContainer *facilityContainer;
+        CustomerGenerator();
+
+    private:
+        void GenerateCustomer();
 };

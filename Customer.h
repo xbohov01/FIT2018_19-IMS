@@ -12,6 +12,7 @@ class Customer : public Process {
     public:
         void Behavior();
         FacilityContainer *facilityContainer;
+        static Histogram H;
     private:
         void internalBehavior();
         void SeizeTicketMachine();
