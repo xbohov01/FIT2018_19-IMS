@@ -82,6 +82,7 @@ int main(int argc, char *argv[])
 
     /* Simulation setup */
     RandomSeed(time(0)); // Setting pseudo random seed
+    SetOutput("1.out");
 
     Init(0, WORK);
     CustomerGenerator *gen = new CustomerGenerator();
@@ -89,8 +90,10 @@ int main(int argc, char *argv[])
     Run();
 
     /* Printing results */
-    Customer::H.Output();
-
+    Customer::FullTime.Output();
+    Customer::LineTime.Output();
+    Customer::MachineTime.Output();
+    Print("Customers left: %d\n", Customer::customerInSystem);
 
     return 0;
 }
