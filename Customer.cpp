@@ -47,7 +47,7 @@ void Customer::Behavior() {
         enteredLine = Time;
 
         Seize(*f);
-        Wait(Uniform(3*MIN, 5*MIN));    // Customer time spent waiting for service 
+        Wait(Uniform(3*MIN, 15*MIN));    // Customer time spent waiting for service 
         Release(*f);
         LineTime(Time-enteredLine);
 
