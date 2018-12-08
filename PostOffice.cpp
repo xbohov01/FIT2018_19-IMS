@@ -93,6 +93,8 @@ int main(int argc, char *argv[])
     Customer::FullTime.Output();
     Customer::LineTime.Output();
     Customer::MachineTime.Output();
+    Print("Customer amount: %d\n", Customer::amount);
+    Print("Customers left unsatisfied: %d\n", Customer::unsatisfied);
     Print("Customers left: %d\n", Customer::customerInSystem);
     Print("Clerks rested: %f\n", ClerkRest::TimeSpent);
 

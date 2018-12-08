@@ -6,26 +6,28 @@
 
 #include "Customer.h"
 #include "ClerkRest.h"
+#include "CustomerTimeout.h"
 
 Histogram Customer::FullTime("Full time spent on post", 0, 5*MIN, 20);
 Histogram Customer::LineTime("Time spent in line to clerk", 0, 2*MIN, 50);
 Histogram Customer::MachineTime("Time spent in line to machine", 0, 2*MIN, 50);
 int Customer::customerInSystem = 0;
 int Customer::count = 0;
+int Customer::amount = 0;
+int Customer::unsatisfied = 0;
 
 void Customer::Behavior() {
     double entered = Time;
-    double enteredMLine, enteredLine;
     double r;
     int orders = 0;
 
+    Customer::amount++;
     Customer::customerInSystem++;
     Customer::count++;
+    leaving = false;
     do {
         Facility* f = facilityContainer->FindShortestQueueTicketMachine();
-        enteredMLine = Time;
         SeizeTicketMachine(f);
-        MachineTime(Time-enteredMLine);
 
         // Send or Receive list / Send or recive package / Other request 
         if ((r = Random()) < 0.3) {
@@ -36,11 +38,9 @@ void Customer::Behavior() {
             f = facilityContainer->QueueingSystem(3);
         }
 
-        enteredLine = Time;
         SeizeClerk(f);
-        LineTime(Time-enteredLine);
-
-    } while (++orders < 3  && (r = Random()) < 0.2);   // Other requests, but 3 at most
+        if (leaving) leave();   // Customer waited too long
+    } while (!leaving && ++orders < 3  && (r = Random()) < 0.2);   // Other requests, but 3 at most
 
     FullTime(Time-entered);    // Full time spent on post
     Customer::customerInSystem--;   // Customer leaves
@@ -55,6 +55,7 @@ void Customer::Behavior() {
 }
 
 void Customer::SeizeTicketMachine(Facility *f) {
+    double enteredMLine = Time;
     Seize(*f);
     if (Random() < 0.9) {
         Wait(Uniform(30,60));   // Usual waiting time 
@@ -62,10 +63,29 @@ void Customer::SeizeTicketMachine(Facility *f) {
         Wait(Uniform(MIN, 3*MIN));  // Extended waiting time
     }
     Release(*f);
+    MachineTime(Time-enteredMLine);
 }
 
 void Customer::SeizeClerk(Facility *f) {
+    double enteredLine = Time;
+    CustomerTimeout *t = new CustomerTimeout(this, f);
     Seize(*f);
-    Wait(Uniform(3*MIN, 15*MIN));    // Customer time spent waiting for service 
-    Release(*f);
+    delete t;
+    if (f->in!=this) {
+        leaving = true;
+    } else {
+        Wait(Uniform(3*MIN, 15*MIN));    // Customer time spent waiting for service 
+        Release(*f);
+    }
+    LineTime(Time-enteredLine);
+}
+
+void Customer::leave() {
+    if (Random() < 0.1) {
+        Facility *f = facilityContainer->QueueingSystem(3); // Gets any queue to complain
+        Seize(*f);
+        Wait(2*MIN);  // Customer complains and asks for manager
+        Release(*f);
+    }
+    unsatisfied++;
 }

@@ -11,12 +11,16 @@
 class Customer : public Process {
     public:
         void Behavior();
+        void leave();
         FacilityContainer *facilityContainer;
+        bool leaving;
+        static int amount;
         static Histogram FullTime;
         static Histogram LineTime;
         static Histogram MachineTime;
         static int customerInSystem;
         static int count;
+        static int unsatisfied;
     private:
         void SeizeTicketMachine(Facility *);
         void SeizeClerk(Facility *);
