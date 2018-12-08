@@ -8,13 +8,17 @@
 #include "ClerkRest.h"
 #include "CustomerTimeout.h"
 
-Histogram Customer::FullTime("Full time spent on post", 0, 5*MIN, 20);
-Histogram Customer::LineTime("Time spent in line to clerk", 0, 2*MIN, 50);
-Histogram Customer::MachineTime("Time spent in line to machine", 0, 2*MIN, 50);
+Histogram Customer::FullTime("Full time spent on post", 0, 5*MIN, 50);
+Histogram Customer::LineTime("Time spent in line to clerk", 0, 5*MIN, 50);
+Histogram Customer::MachineTime("Time spent in line to machine", 0, 30, 20);
 int Customer::customerInSystem = 0;
 int Customer::count = 0;
 int Customer::amount = 0;
 int Customer::unsatisfied = 0;
+
+Customer::Customer(FacilityContainer *con) : facilityContainer(con) {
+    Activate();
+}
 
 void Customer::Behavior() {
     double entered = Time;
@@ -45,11 +49,9 @@ void Customer::Behavior() {
     FullTime(Time-entered);    // Full time spent on post
     Customer::customerInSystem--;   // Customer leaves
 
-    if (Customer::count >= 5) {
+    if (Customer::count >= 5) { // Create possibility for Clerk to do other work
         Customer::count -= 5;
-        ClerkRest *rest = new ClerkRest();
-        rest->facilityContainer = this->facilityContainer;
-        rest->Activate();
+        ClerkRest *rest = new ClerkRest(facilityContainer);
     }
 
 }

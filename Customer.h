@@ -10,6 +10,7 @@
 
 class Customer : public Process {
     public:
+        Customer(FacilityContainer *);
         void Behavior();
         void leave();
         FacilityContainer *facilityContainer;

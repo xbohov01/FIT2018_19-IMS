@@ -11,6 +11,8 @@ CustomerTimeout::CustomerTimeout(Customer *c, Facility *f) : customer(c), facili
 }
 
 void CustomerTimeout::Behavior() {
-    customer->Out();    // Remove from current queue
-    customer->Activate();   // Run again
+    if (customer->isInQueue()) {
+        customer->Out();    // Remove from current queue
+        customer->Activate();   // Run again
+    }
 }

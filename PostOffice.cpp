@@ -12,7 +12,6 @@
 #include "simlib.h"
 #include "CustomerGenerator.h"
 
-
 int main(int argc, char *argv[])
 {
     //Argument processing
@@ -82,11 +81,10 @@ int main(int argc, char *argv[])
 
     /* Simulation setup */
     RandomSeed(time(0)); // Setting pseudo random seed
-    SetOutput("1.out");
+    SetOutput("result.out");
 
     Init(0, WORK);
-    CustomerGenerator *gen = new CustomerGenerator();
-    gen->facilityContainer = facilityContainer;
+    CustomerGenerator *gen = new CustomerGenerator(facilityContainer);
     Run();
 
     /* Printing results */
@@ -94,9 +92,8 @@ int main(int argc, char *argv[])
     Customer::LineTime.Output();
     Customer::MachineTime.Output();
     Print("Customer amount: %d\n", Customer::amount);
-    Print("Customers left unsatisfied: %d\n", Customer::unsatisfied);
-    Print("Customers left: %d\n", Customer::customerInSystem);
-    Print("Clerks rested: %f\n", ClerkRest::TimeSpent);
+    Print("Customers left unsatisfied: %d\n", Customer::unsatisfied+Customer::customerInSystem);
+    Print("Clerks interrupt time: %.0f\n", ClerkRest::TimeSpent);
 
     return 0;
 }

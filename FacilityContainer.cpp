@@ -98,23 +98,18 @@ Facility* FacilityContainer::FindShortestQueueInFacilityList(list<Facility*>& fa
     Facility *tmp;
 
     if(shortest == 0){
-        //return *it;
         facilityPtr = *it;
-        //printf("$$$ %s %d\n", facilityPtr->Name(), facilityPtr->QueueLen());
         return facilityPtr;
     }
 
     for(it = facilityList.begin(); it != facilityList.end(); it++){
         tmp = *it;
-        //printf(">> %s %d\n", tmp->Name(), tmp->QueueLen());
         if (shortest > (*it)->QueueLen()){
             shortest = (*it)->QueueLen();
             facilityPtr = *it;
         }
     }
-    //printf("##########\n");
 
-    //printf("$$$ %s %d\n", facilityPtr->Name(), facilityPtr->QueueLen());
     return facilityPtr;
 }
 

@@ -10,6 +10,7 @@
 
 class ClerkRest : public Process {
     public:
+        ClerkRest(FacilityContainer *);
         void Behavior();
         FacilityContainer *facilityContainer;
         static double TimeSpent;

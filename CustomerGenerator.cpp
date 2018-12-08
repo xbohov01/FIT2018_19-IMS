@@ -6,6 +6,10 @@
 
 #include "CustomerGenerator.h"
 
+CustomerGenerator::CustomerGenerator(FacilityContainer *con) : facilityContainer(con) { 
+    Activate();
+}
+
 void CustomerGenerator::Behavior(){
     static bool first_run = true;
     if (first_run) {
@@ -21,13 +25,7 @@ void CustomerGenerator::Behavior(){
     Activate(Time+Uniform(3*MIN, 6*MIN));
 }
 
-CustomerGenerator::CustomerGenerator(){ 
-    Activate();
-}
-
 void CustomerGenerator::GenerateCustomer(){
-    Customer *customer = new Customer();
-    customer->facilityContainer = this->facilityContainer;
-    customer->Activate();
+    Customer *customer = new Customer(facilityContainer);
 }
 

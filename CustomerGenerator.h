@@ -11,12 +11,10 @@
 #include "ClerkRest.h"
 
 class CustomerGenerator : public Event {
-    
-    void Behavior();
-    
     public:       
+        CustomerGenerator(FacilityContainer *);
+        void Behavior();
         FacilityContainer *facilityContainer;
-        CustomerGenerator();
 
     private:
         void GenerateCustomer();

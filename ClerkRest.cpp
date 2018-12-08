@@ -8,12 +8,16 @@
 
 double ClerkRest::TimeSpent = 0;
 
+ClerkRest::ClerkRest(FacilityContainer *cont) : facilityContainer(cont) {
+    Activate();
+}; 
+
 void ClerkRest::Behavior() {
     double r, restStart;
     Facility *f = facilityContainer->QueueingSystem(3);  // Take any clerk with the shortest queue
     if ((r=Random()) < 0.8) {   // Clerk may do other activity for some time
         restStart = Time;
-        Seize(*f, DEFAULT_PRIORITY+1);
+        Seize(*f, DEFAULT_PRIORITY+1);  // Seize queue with higher priority than other customers (p=1)
         Wait(Uniform(2*MIN,5*MIN));
         Release(*f);
         TimeSpent += Time-restStart;
