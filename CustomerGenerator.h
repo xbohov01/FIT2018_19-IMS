@@ -8,6 +8,7 @@
 #include "simlib.h"
 #include "Customer.h"
 #include "FacilityContainer.h"
+#include "ClerkRest.h"
 
 class CustomerGenerator : public Event {
     

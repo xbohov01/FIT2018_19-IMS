@@ -94,6 +94,7 @@ int main(int argc, char *argv[])
     Customer::LineTime.Output();
     Customer::MachineTime.Output();
     Print("Customers left: %d\n", Customer::customerInSystem);
+    Print("Clerks rested: %f\n", ClerkRest::TimeSpent);
 
     return 0;
 }

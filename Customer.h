@@ -18,7 +18,6 @@ class Customer : public Process {
         static int customerInSystem;
         static int count;
     private:
-        void internalBehavior();
-        void SeizeTicketMachine();
-        void SeizeClerk();
+        void SeizeTicketMachine(Facility *);
+        void SeizeClerk(Facility *);
 };
