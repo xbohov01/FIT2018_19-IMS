@@ -7,7 +7,7 @@
 #include "CustomerTimeout.h"
 
 CustomerTimeout::CustomerTimeout(Customer *c, Facility *f) : customer(c), facility(f) {
-    Activate(Time+Uniform(40*MIN, 90*MIN));
+    Activate(Time+Uniform(30*MIN, 60*MIN));
 }
 
 void CustomerTimeout::Behavior() {

@@ -33,13 +33,12 @@ void Customer::Behavior() {
         Facility* f = facilityContainer->FindShortestQueueTicketMachine();
         SeizeTicketMachine(f);
 
-        // Send or Receive list / Send or recive package / Other request 
         if ((r = Random()) < 0.3) {
-            f = facilityContainer->QueueingSystem(1);
+            f = facilityContainer->QueueingSystem(1);   // Recive package
         } else if (r >= 0.3 && r < 0.8) {
-            f = facilityContainer->QueueingSystem(2);
+            f = facilityContainer->QueueingSystem(2);   // Send package
         } else {
-            f = facilityContainer->QueueingSystem(3);
+            f = facilityContainer->QueueingSystem(3);   // Other request
         }
 
         SeizeClerk(f);
@@ -50,8 +49,7 @@ void Customer::Behavior() {
     Customer::customerInSystem--;   // Customer leaves
 
     if (Customer::count >= 5) { // Create possibility for Clerk to do other work
-        Customer::count -= 5;
-        ClerkRest *rest = new ClerkRest(facilityContainer);
+        ClerkRest *rest = new ClerkRest(facilityContainer, Customer::count);
     }
 
 }
@@ -60,7 +58,7 @@ void Customer::SeizeTicketMachine(Facility *f) {
     double enteredMLine = Time;
     Seize(*f);
     if (Random() < 0.9) {
-        Wait(Uniform(30,60));   // Usual waiting time 
+        Wait(Uniform(10,60));   // Usual waiting time 
     } else {
         Wait(Uniform(MIN, 3*MIN));  // Extended waiting time
     }

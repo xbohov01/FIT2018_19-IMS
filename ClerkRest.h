@@ -7,11 +7,14 @@
 #pragma once
 #include "simlib.h"
 #include "FacilityContainer.h"
+#include "Customer.h"
 
 class ClerkRest : public Process {
     public:
-        ClerkRest(FacilityContainer *);
+        ClerkRest(FacilityContainer *c, int count);
         void Behavior();
         FacilityContainer *facilityContainer;
         static double TimeSpent;
+    private:
+        int count;
 };

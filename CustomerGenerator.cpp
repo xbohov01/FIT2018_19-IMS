@@ -21,8 +21,8 @@ void CustomerGenerator::Behavior(){
         GenerateCustomer();
     }
 
-    //Generate next customer after 3-6 minutes
-    Activate(Time+Uniform(3*MIN, 6*MIN));
+    //Generate next customer after 1.5-4 minutes
+    Activate(Time+Uniform(1.5*MIN, 4*MIN));
 }
 
 void CustomerGenerator::GenerateCustomer(){
